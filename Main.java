@@ -23,6 +23,46 @@ public class Main {
 			System.out.println("Product Not Found!");
 		
 		boolean sear =sf.processingProduct("hard disk",40);
+		String st = sf.avg();
+		if(st!=null)
+			System.out.println(st);
+		else
+			System.out.println("Table Not Found!");
+		
+		String max = sf.max();
+		if(max!=null)
+			System.out.println(max);
+		else
+			System.out.println("Table Not Found!");
+		
+		String min = sf.min();
+		if(min!=null)
+			System.out.println(min);
+		else
+			System.out.println("Table Not Found!");
+		
+		String maxStock = sf.maxStock();
+		if(maxStock!=null)
+			System.out.println(maxStock);
+		else
+			System.out.println("Table Not Found!");
+		
+		String minStock = sf.minStock();
+		if(minStock!=null)
+			System.out.println(minStock);
+		else
+			System.out.println("Table Not Found!");
+		
+		String numOfProducts = sf.numOfProducts();
+		if(numOfProducts!=null)
+			System.out.println(numOfProducts);
+		else
+			System.out.println("Table Not Found!");
+		Users a= sf.getStatus("giannhs", "kasimhs");
+		if(a!=null)
+			System.out.println(a.getStatus());
+		else
+			System.out.println("Product Not Found!");
 		
 	}
 }

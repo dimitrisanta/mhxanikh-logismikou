@@ -97,7 +97,104 @@ public class StorageFunctions {
 			// TODO Auto-generated catch block
 			System.err.println(e.getMessage());
 			return false;
+		}
 		
 	}
-}
+	public String avg(){
+		String st = null;
+		try {
+			rs = stmt.executeQuery("SELECT AVG(price) from proionta");
+			if(rs.next()){
+			st=rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return st;
+		}
+	
+	public String max(){
+		String max = null;
+		try {
+			rs = stmt.executeQuery("SELECT MAX(price) from proionta");
+			if(rs.next()){
+			max=rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return max;
+		}
+	
+	public String min(){
+		String min = null;
+		try {
+			rs = stmt.executeQuery("SELECT MIN(price) from proionta");
+			if(rs.next()){
+			min=rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return min;
+		}
+	
+	public String maxStock(){
+		String maxStock = null;
+		try {
+			rs = stmt.executeQuery("SELECT MAX(stock) from proionta");
+			if(rs.next()){
+			maxStock=rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return maxStock;
+		}
+	
+	public String minStock(){
+		String minStock = null;
+		try {
+			rs = stmt.executeQuery("SELECT MIN(stock) from proionta");
+			if(rs.next()){
+			minStock=rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return minStock;
+		}
+	
+	public String numOfProducts(){
+		String numP = null;
+		try {
+			rs = stmt.executeQuery("SELECT COUNT(proion) from proionta");
+			if(rs.next()){
+			numP=rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return numP;
+		}
+	public Users getStatus(String username,String password){
+		Users a = null;
+		try {
+			rs = stmt.executeQuery("Select status from users where username =\""+username+"\""+"AND password=\""+password+"\"");
+			if(rs.next()){
+				a = new Users( null, null, rs.getInt("status") );
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return a;
+		
+	}
 }
