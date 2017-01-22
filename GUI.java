@@ -1,4 +1,6 @@
 package mhxalog;
+
+import java.sql.*;
 import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -44,6 +46,7 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		setTitle("Log In");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 344, 521);
 		contentPane = new JPanel();
@@ -72,17 +75,32 @@ public class GUI extends JFrame {
 		btnLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				StorageFunctions st = new StorageFunctions();
-				st.connection();
-				Users a= st.getStatus(textField.getText(),String.valueOf(passwordField.getPassword()));
-				if(a.getStatus()==1)
-					JOptionPane.showMessageDialog(null,"kalwsorises diaxeiristh");
-				else if(a.getStatus()==2)	
-					JOptionPane.showMessageDialog(null,"kalwsorises upallhle");
-				else	
-					JOptionPane.showMessageDialog(null,"lathos plhktrologhsh");
+				try {
+					st.connection();
+					Users a= st.getStatus(textField.getText(),String.valueOf(passwordField.getPassword()));
+					if(a.getStatus()==1)
+					{
+						dispose();
+						Diaxeirisths diax= new Diaxeirisths();
+						diax.setVisible(true);
+					}
+					else if(a.getStatus()==2)	
+					{
+						dispose();
+						Upallhlos upal= new Upallhlos();
+						upal.setVisible(true);
+					}
+					else 
+					{
+					JOptionPane.showMessageDialog(null,"Username or password is wrong.TRY AGAIN");
+					}
+				}catch(Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "Username or password is wrong.TRY AGAIN");
+				}
 	
 			}
-		});
+		});//
 		btnLog.setBounds(107, 327, 97, 25);
 		contentPane.add(btnLog);
 	}

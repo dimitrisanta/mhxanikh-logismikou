@@ -57,6 +57,11 @@ public class StorageFunctions {
 			System.err.println(e.getMessage());
 			return false;
 		}
+		finally
+		{
+			return false;
+		}
+		
 	}
 	
 	public Product getStock(String productName){
@@ -100,12 +105,12 @@ public class StorageFunctions {
 		}
 		
 	}
-	public String avg(){
-		String st = null;
+	public float avg(){
+		float st = 0;
 		try {
 			rs = stmt.executeQuery("SELECT AVG(price) from proionta");
 			if(rs.next()){
-			st=rs.getString(1);
+			st=rs.getFloat(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
