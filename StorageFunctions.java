@@ -57,10 +57,7 @@ public class StorageFunctions {
 			System.err.println(e.getMessage());
 			return false;
 		}
-		finally
-		{
-			return false;
-		}
+		
 		
 	}
 	

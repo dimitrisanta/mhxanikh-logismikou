@@ -9,6 +9,8 @@ import java.awt.EventQueue;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 public class Upallhlos extends JFrame {
@@ -55,6 +57,12 @@ public class Upallhlos extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						StorageFunctions edit=new StorageFunctions();
 						edit.connection();
+						if(textName.getText().trim().isEmpty() || textField_1.getText().trim().isEmpty() )
+						{
+							JOptionPane.showMessageDialog(null,"Fill all the fields");
+						}
+						else
+						{
 						boolean ed = edit.processingProduct(textName.getText(),Integer.valueOf(textField_1.getText()));
 						if(ed==true)
 						{
@@ -63,7 +71,7 @@ public class Upallhlos extends JFrame {
 						}
 						else
 							JOptionPane.showMessageDialog(null,"Product Not found!TRY AGAIN");
-
+						}
 					}
 				});
 				btnEditStock.setBounds(12, 222, 97, 25);
@@ -99,11 +107,31 @@ public class Upallhlos extends JFrame {
 				contentPane.add(btnShowStock);
 				
 				textField = new JTextField();
+				textField.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent e) {
+						char c = e.getKeyChar();
+						if(! (Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE ))
+						{
+							e.consume();
+						}
+					}
+				});
 				textField.setBounds(173, 53, 116, 22);
 				contentPane.add(textField);
 				textField.setColumns(10);
 				
 				textField_1 = new JTextField();
+				textField_1.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent e) {
+						char c = e.getKeyChar();
+						if(! (Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE ))
+						{
+							e.consume();
+						}
+					}
+				});
 				textField_1.setBounds(341, 53, 116, 22);
 				contentPane.add(textField_1);
 				textField_1.setColumns(10);

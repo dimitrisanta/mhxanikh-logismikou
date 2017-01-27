@@ -13,6 +13,8 @@ import net.proteanit.sql.DbUtils;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Diaxeirisths extends JFrame {
 	private JPanel contentPane;
@@ -65,6 +67,12 @@ public class Diaxeirisths extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				StorageFunctions create=new StorageFunctions();
 				create.connection();
+				if(textName.getText().trim().isEmpty() || textField_1.getText().trim().isEmpty() )
+				{
+					JOptionPane.showMessageDialog(null,"Fill all the fields");
+				}
+				else
+				{
 				boolean cr = create.createProduct(textName.getText(),Float.valueOf(textField.getText()),Integer.valueOf(textField_1.getText()));
 				if(cr==true)
 				{
@@ -73,6 +81,7 @@ public class Diaxeirisths extends JFrame {
 				}
 				else
 					JOptionPane.showMessageDialog(null,"FILL ALL THE FIELDS CORRECTLY");
+				}
 			}
 		});
 		btnCreate.setBounds(12, 100, 97, 25);
@@ -85,16 +94,26 @@ public class Diaxeirisths extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				StorageFunctions edit=new StorageFunctions();
 				edit.connection();
-				boolean ed = edit.processingProduct(textName.getText(),Integer.valueOf(textField_1.getText()));
-				if(ed==true)
+				if(textName.getText().trim().isEmpty() || textField_1.getText().trim().isEmpty() )
 				{
-					JOptionPane.showMessageDialog(null,"Success!!!");
-
+					JOptionPane.showMessageDialog(null,"Fill all the fields");
 				}
 				else
+				{
+				boolean ed = edit.processingProduct(textName.getText(),Integer.valueOf(textField_1.getText()));
+					if(ed==true)
+						{
+							JOptionPane.showMessageDialog(null,"Success!!!");
+
+						}
+					else
 					JOptionPane.showMessageDialog(null,"Product Not found!TRY AGAIN");
 
+				}
 			}
+			
+	
+			
 		});
 		btnEditStock.setBounds(12, 222, 97, 25);
 		contentPane.add(btnEditStock);
@@ -105,6 +124,7 @@ public class Diaxeirisths extends JFrame {
 		
 		
 		textName = new JTextField();
+		
 		textName.setBounds(12, 53, 116, 22);
 		contentPane.add(textName);
 		textName.setColumns(10);
@@ -129,11 +149,31 @@ public class Diaxeirisths extends JFrame {
 		contentPane.add(btnShowStock);
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(! (Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE ))
+				{
+					e.consume();
+				}
+			}
+		});
 		textField.setBounds(173, 53, 116, 22);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(! (Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE ))
+				{
+					e.consume();
+				}
+			}
+		});
 		textField_1.setBounds(341, 53, 116, 22);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
